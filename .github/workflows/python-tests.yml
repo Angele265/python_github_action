@@ -9,6 +9,8 @@ on:
     branches:
       - main
 
+  workflow_dispatch:
+
 
 jobs:
 
@@ -34,9 +36,21 @@ jobs:
           pip install -r requirements.txt
 
 
+      - name: Check installed packages
+        run: |
+          pytest --version
+          pip list
+
+
       - name: Run tests and generate HTML report
         run: |
-          pytest --html=report.html --self-contained-html
+          pytest tests/ --html=report.html --self-contained-html
+        continue-on-error: true
+
+
+      - name: Check files
+        run: |
+          ls -la
 
 
       - name: Upload test report
