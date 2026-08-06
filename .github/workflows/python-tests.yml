@@ -1,4 +1,4 @@
-name: Python Tests
+name: Python Tests with Allure
 
 on:
   push:
@@ -36,26 +36,35 @@ jobs:
           pip install -r requirements.txt
 
 
-      - name: Check installed packages
+      - name: Run pytest and create Allure results
         run: |
-          pytest --version
-          pip list
-
-
-      - name: Run tests and generate HTML report
-        run: |
-          pytest tests/ --html=report.html --self-contained-html
+          pytest --alluredir=allure-results
         continue-on-error: true
 
 
-      - name: Check files
-        run: |
-          ls -la
-
-
-      - name: Upload test report
+      - name: Upload Allure results
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: pytest-report
-          path: report.html
+          name: allure-results
+          path: allure-results
+
+
+      - name: Install Allure Commandline
+        run: |
+          wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.tgz
+          tar -zxvf allure-2.29.0.tgz
+          sudo mv allure-2.29.0 /opt/allure
+          sudo ln -s /opt/allure/bin/allure /usr/bin/allure
+
+
+      - name: Generate Allure Report
+        run: |
+          allure generate allure-results -o allure-report --clean
+
+
+      - name: Deploy Allure Report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
