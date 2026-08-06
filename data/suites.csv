@@ -1,3 +1,4 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Thu Aug 06 13:09:06 UTC 2026","Thu Aug 06 13:09:06 UTC 2026","1","tests","test_math","","","","test_add",""
-"failed","Thu Aug 06 13:09:06 UTC 2026","Thu Aug 06 13:09:06 UTC 2026","0","tests","test_math","","","","test_sub",""
+"passed","Thu Aug 06 13:35:35 UTC 2026","Thu Aug 06 13:35:35 UTC 2026","0","tests","test_math","","","","test_add",""
+"failed","Thu Aug 06 13:35:35 UTC 2026","Thu Aug 06 13:35:35 UTC 2026","0","tests","test_math","","","","test_mult",""
+"failed","Thu Aug 06 13:35:35 UTC 2026","Thu Aug 06 13:35:35 UTC 2026","0","tests","test_math","","","","test_sub",""
